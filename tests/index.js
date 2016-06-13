@@ -39,8 +39,7 @@ describe('Adapters', () => {
 				{
 					foo: 33.2, 
 					bar: 'some string %$*-_=+(#!?&|\"/\\',
-					test: null,
-					undef: undefined
+					test: null
 				},
 				[1,2,'3',null],
 				'test',
@@ -67,7 +66,7 @@ describe('Adapters', () => {
 				var client = new Kalm.Client({
 					encoder: 'snappy', 
 					port:8000, 
-					hostname:'http://0.0.0.0'
+					hostname:'0.0.0.0'
 				});
 				client.send('test', {foo:'bar'});
 			});
