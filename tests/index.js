@@ -8,57 +8,67 @@
 
 var assert = require('chai').assert;
 var Kalm = require('kalm');
-var websocket = require('../index');
+var snappy = require('../index');
 
 /* Models --------------------------------------------------------------------*/
 
-var adapterFormat = {
-	listen: function() {},
-	send: function() {},
-	stop: function() {},
-	createSocket: function() {},
-	disconnect: function() {}
+var encoderFormat = {
+	encode: function() {},
+	decode: function() {}
 };
 
 /* Suite ---------------------------------------------------------------------*/
 
-describe('Adapters', function() {
+describe('Adapters', () => {
 
-	describe('methods', function() {
-		it('register', function() {
-			Kalm.adapters.register('ws', websocket);
+	describe('methods', () => {
+		it('register', () => {
+			Kalm.encoders.register('snappy', snappy);
 		});
 
-		it('resolve', function() {
-			var ws_test = Kalm.adapters.resolve('ws');
-			assert.isObject(ws_test, 'ws is not a valid adapter object');
-			allMembersTypeMatch(ws_test, adapterFormat);
+		it('resolve', () => {
+			var e = Kalm.encoders.resolve('snappy');
+			assert.isObject(e, 'snappy is not a valid encoder object');
+			allMembersTypeMatch(e, encoderFormat);
+		});
+
+		it('data integrity', () => {
+			var e = Kalm.encoders.resolve('snappy');
+
+			var tests = [
+				{
+					foo: 33.2, 
+					bar: 'some string %$*-_=+(#!?&|\"/\\',
+					test: null,
+					undef: undefined
+				},
+				[1,2,'3',null],
+				'test',
+				0
+			];
+
+			tests.forEach((p) => assert.deepEqual(e.decode(e.encode(p)), p));
 		});
 	});
 
-	describe('Smoke test', function() {
-		it('run ws + json', function(done) {
-			var server = new Kalm.Server({encoder: 'json', adapter:'ws', port:8000});
-			server.channel('test', function(data) {
+	describe('Smoke test', () => {
+		it('run snappy + json', (done) => {
+			var server = new Kalm.Server({
+				encoder: 'snappy',
+				port:8000
+			});
+
+			server.subscribe('test', function(data) {
 				assert.deepEqual(data, {foo:'bar'});
 				server.stop(done);
 			});
 
-			server.on('ready', function() {
-				var client = new Kalm.Client({encoder: 'json', adapter:'ws', port:8000, hostname:'http://0.0.0.0'});
-				client.send('test', {foo:'bar'});
-			});
-		});
-
-		it('run ws + msg-pack', function(done) {
-			var server = new Kalm.Server({encoder: 'msg-pack',adapter:'ws', port:8000});
-			server.channel('test', function(data) {
-				assert.deepEqual(data, {foo:'bar'});
-				server.stop(done);
-			});
-
-			server.on('ready', function() {
-				var client = new Kalm.Client({encoder: 'msg-pack',adapter:'ws', port:8000, hostname:'http://0.0.0.0'});
+			server.on('ready', () => {
+				var client = new Kalm.Client({
+					encoder: 'snappy', 
+					port:8000, 
+					hostname:'http://0.0.0.0'
+				});
 				client.send('test', {foo:'bar'});
 			});
 		});

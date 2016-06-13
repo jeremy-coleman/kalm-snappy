@@ -1,7 +1,7 @@
 {
-  "name": "kalm-websocket",
-  "version": "1.1.1",
-  "description": "A web-socket adapter for kalm",
+  "name": "kalm-snappy",
+  "version": "1.0.0",
+  "description": "A snappy compressing encoder for kalm",
   "main": "index.js",
   "scripts": {
     "test": "mocha tests/index.js",
@@ -9,30 +9,29 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/fed135/kalm-websocket.git"
+    "url": "git+https://github.com/fed135/kalm-snappy.git"
   },
   "keywords": [
-    "socket.io",
-    "socket",
-    "io",
-    "websocket",
-    "web",
+    "google",
+    "snappy",
+    "encoder",
+    "compressing",
+    "zip",
     "browser",
     "kalm"
   ],
   "author": "frederic charette <fredericcharette@gmail.com>",
   "license": "GPL-3.0",
   "bugs": {
-    "url": "https://github.com/fed135/kalm-websocket/issues"
+    "url": "https://github.com/fed135/kalm-snappy/issues"
   },
-  "homepage": "https://github.com/fed135/kalm-websocket#readme",
+  "homepage": "https://github.com/fed135/kalm-snappy#readme",
   "dependencies": {
-    "socket.io": "1.4.x",
-    "socket.io-client": "1.4.x"
+    "snappy": "^5.0.3"
   },
   "devDependencies": {
     "chai": "3.5.x",
-    "kalm": "0.2.x",
+    "kalm": "1.0.x",
     "mocha": "2.4.x"
   }
 }
