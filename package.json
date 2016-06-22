@@ -31,7 +31,7 @@
   },
   "devDependencies": {
     "chai": "3.5.x",
-    "kalm": "1.0.x",
+    "kalm": "^1.1.0",
     "mocha": "2.4.x"
   }
 }
