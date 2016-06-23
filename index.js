@@ -7,27 +7,38 @@
 
 /* Requires ------------------------------------------------------------------*/
 
-var snappy = require('snappy');
+const snappy = require('snappy');
+
+/* Local variables -----------------------------------------------------------*/
+
+const opts = { asBuffer: false };
 
 /* Methods -------------------------------------------------------------------*/
 
 /**
  * Encodes + copresses a payload
  * @param {object} payload The payload to encode
- * @returns {Buffer} The encoded payload
+ * @returns {Promise} The encoded payload
  */
 function encode(payload) {
-	return snappy.compressSync(new Buffer(JSON.stringify(payload)));
+	return new Promise((resolve) => {
+		snappy.compress(new Buffer(JSON.stringify(payload)), (err, res) => {
+			resolve(res);
+		});
+	});
 }
 
 /**
  * Decodes a payload
  * @param {Buffer} payload The payload to decode
- * @returns {object} The decoded payload
+ * @returns {Promise} The decoded payload
  */
 function decode(payload) {
-
-	return JSON.parse(snappy.uncompressSync(payload).toString());
+	return new Promise((resolve) => {
+		snappy.uncompress(payload, opts, (err, res) => {
+			resolve(JSON.parse(res));
+		})
+	});
 }
 
 

@@ -1,6 +1,6 @@
 {
   "name": "kalm-snappy",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A snappy compressing encoder for kalm",
   "main": "index.js",
   "scripts": {
@@ -27,11 +27,11 @@
   },
   "homepage": "https://github.com/fed135/kalm-snappy#readme",
   "dependencies": {
-    "snappy": "^5.0.3"
+    "snappy": "5.0.x"
   },
   "devDependencies": {
     "chai": "3.5.x",
-    "kalm": "1.0.x",
+    "kalm": "^1.2.0",
     "mocha": "2.4.x"
   }
 }

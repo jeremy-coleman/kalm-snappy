@@ -46,7 +46,13 @@ describe('Adapters', () => {
 				0
 			];
 
-			tests.forEach((p) => assert.deepEqual(e.decode(e.encode(p)), p));
+			tests.forEach((p) => {
+				e.encode(p).then((compact) => {
+					e.decode(compact).then((inflated) => {
+						assert.deepEqual(inflated, p);
+					});
+				});
+			});
 		});
 	});
 
