@@ -1,6 +1,6 @@
 {
   "name": "kalm-snappy",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "description": "A snappy compressing encoder for kalm",
   "main": "index.js",
   "scripts": {
