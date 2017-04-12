@@ -1,58 +1,71 @@
 # kalm-snappy
 
-[Snappy]() compressing encoder for [Kalm](https://github.com/fed135/Kalm)
+[Snappy](https://google.github.io/snappy/) [serializer](https://github.com/kalm/kalm.js/wiki/Serials) for [Kalm](https://github.com/kalm/kalm.js)
 
 [![kalm-snappy](https://img.shields.io/npm/v/kalm-snappy.svg)](https://www.npmjs.com/package/kalm-snappy)
-[![Build Status](https://travis-ci.org/fed135/kalm-websocket.svg?branch=master)](https://travis-ci.org/fed135/kalm-snappy)
-[![Dependencies Status](https://david-dm.org/fed135/Kalm.svg)](https://www.npmjs.com/package/kalm-snappy)
+[![Node](https://img.shields.io/badge/node->%3D4.0-blue.svg)](https://nodejs.org)
+[![Build Status](https://travis-ci.org/kalm/kalm-websocket.svg?branch=master)](https://travis-ci.org/kalm/kalm-snappy)
+[![Dependencies Status](https://david-dm.org/kalm/Kalm.svg)](https://www.npmjs.com/package/kalm-snappy)
 
-## Compatibility
+## Install
 
-NODE >= 6.0.0
-Kalm >= 1.0.0
+    npm install kalm-snappy
+
 
 ## Usage
 
-Using with Kalm:
+Setting up your server:
 
-    var Kalm = require('kalm');
-    var snappy = require('kalm-snappy');
+```node
+    const Kalm = require('kalm');
+    const snappy = require('kalm-snappy');
     
-    Kalm.encoders.register('snappy', snappy);
-
-    var server = new Kalm.Server({
-	    port: 3000,
-	    adapter: 'tcp',
-	    encoder: 'snappy',
-	    channels: {
-		    '/': function(data) {
-			    console.log('GOT "' + data + '" on main channel!');
-		    }
-		  }
+    const server = Kalm.listen({
+        port: 3000,
+        serial: snappy
     });
 
+    server.on('connection', (client) => {
+        client.subscribe('/', (data) => {
+            console.log(data);  // 'Hello from Browser!'
+        });
+    });
+    
+```
 
 Using in your browser:
 
+```node
     // Install kalm and kalm-snappy via a package manager (recommended).
-		 
-    var Kalm = require('kalm');
-    var snappy = require('kalm-snappy');
-    var ws = require('kalm-websocket');
+         
+    import Kalm from 'kalm';
+    import snappy from 'kalm-snappy';
     
-    Kalm.adapters.register('ws', ws);
-    Kalm.encoders.register('snappy', snappy);
-
-    var server = new Kalm.Server({
-	    hostname: 'http://127.0.0.1',	// Put your server addr
-	    port: 3000,
-	    adapter: 'ws',
-	    encoder: 'snappy',
-	    channels: {
-		    '/': function(data) {
-			    console.log('GOT "' + data + '" on main channel!');
-		    }
-		  }
+    const client = Kalm.connect({
+        hostname: '127.0.0.1',  // Your server's hostname
+        port: 3000,             // Your server's port
+        serial: snappy
     });
 
+    client.write('Hello from Browser');
     
+```
+
+
+## Testing
+
+`npm test`
+
+
+## Contribute
+
+Please do! This is an open source project - if you see something that you want, [open an issue](//github.com/kalm/kalm-snappy/issues/new) or file a pull request.
+
+If you have a major change, it would be better to open an issue first so that we can talk about it. 
+
+I am always looking for more maintainers, as well. Get involved. 
+
+
+## License 
+
+[Apache 2.0](LICENSE) (c) 2017 Frederic Charette

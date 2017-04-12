@@ -1,15 +1,14 @@
 {
   "name": "kalm-snappy",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "A snappy compressing encoder for kalm",
   "main": "index.js",
   "scripts": {
-    "test": "mocha tests/index.js",
-    "build": "webpack  -p -d -j --define process.env.NODE_ENV='\"browser\"' --config ./webpack.config"
+    "test": "mocha tests/index.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/fed135/kalm-snappy.git"
+    "url": "git+https://github.com/kalm/kalm-snappy.git"
   },
   "keywords": [
     "google",
@@ -18,20 +17,23 @@
     "compressing",
     "zip",
     "browser",
-    "kalm"
+    "kalm",
+    "serial",
+    "serialization",
+    "serializer"
   ],
   "author": "frederic charette <fredericcharette@gmail.com>",
-  "license": "GPL-3.0",
+  "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/fed135/kalm-snappy/issues"
+    "url": "https://github.com/kalm/kalm-snappy/issues"
   },
-  "homepage": "https://github.com/fed135/kalm-snappy#readme",
+  "homepage": "https://github.com/kalm/kalm-snappy#readme",
   "dependencies": {
-    "snappy": "5.0.x"
+    "snappyjs": "^0.5.0"
   },
   "devDependencies": {
-    "chai": "3.5.x",
-    "kalm": "^1.2.0",
-    "mocha": "2.4.x"
+    "chai": "^3.5.0",
+    "kalm": "^2.0.0",
+    "mocha": "^3.1.0"
   }
 }
