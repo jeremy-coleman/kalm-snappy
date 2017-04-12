@@ -5,7 +5,7 @@
 [![kalm-snappy](https://img.shields.io/npm/v/kalm-snappy.svg)](https://www.npmjs.com/package/kalm-snappy)
 [![Node](https://img.shields.io/badge/node->%3D4.0-blue.svg)](https://nodejs.org)
 [![Build Status](https://travis-ci.org/kalm/kalm-websocket.svg?branch=master)](https://travis-ci.org/kalm/kalm-snappy)
-[![Dependencies Status](https://david-dm.org/kalm/Kalm.svg)](https://www.npmjs.com/package/kalm-snappy)
+[![Dependencies Status](https://david-dm.org/kalm/kalm-snappy.svg)](https://david-dm.org/kalm/kalm-snappy)
 
 ## Install
 
